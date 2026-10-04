@@ -31,7 +31,7 @@ export default function SiteNav() {
       <nav className="site-nav-links" aria-label="Main navigation" onClickCapture={handleNavClick}>
         <GooeyNav items={navItems} />
       </nav>
-      <a className="site-nav-resume" href="/manus-storage/john-paul-ruiz-resume_1344f015.pdf" download="John-Paul-R-Ruiz-Resume.pdf">My Resume</a>
+      <a className="site-nav-resume" href="/John-Paul-Ruiz-Resume.pdf" download="John-Paul-Ruiz-Resume.pdf">My Resume</a>
     </header>
   );
 }

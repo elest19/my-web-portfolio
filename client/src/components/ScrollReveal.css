@@ -1,0 +1,31 @@
+.scroll-reveal {
+  /* Upstream sets `margin: 20px 0` for its standalone demo. Dropped here: every
+     usage on this site already carries its own spacing from the layout classes
+     passed in via containerClassName (e.g. .records-card-grid has none,
+     .contact-layout sets its own), so the demo margin would silently add 20px
+     to the top and bottom of the block containers. */
+  margin: 0;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+  /* The upstream demo sits alone on a page, so this <p> carries the type. Here it
+     wraps a heading the site already styles, so it must not add its own margins. */
+  margin: 0;
+}
+
+.word {
+  display: inline-block;
+}
+
+/* Project adaptation: the portfolio styles its own section headings, and those
+   rules sit on the container. Let the type cascade down to the text wrapper
+   instead of the upstream clamp overriding it. */
+.about-title .scroll-reveal-text,
+.records-section-heading .scroll-reveal-text {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}

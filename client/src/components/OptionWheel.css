@@ -1,0 +1,97 @@
+.option-wheel {
+  --ow-text-color: #a6a6a6;
+  --ow-active-color: #ffffff;
+  --ow-font-size: 3rem;
+  --ow-inset: 80px;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+
+.option-wheel--dragging {
+  cursor: grabbing;
+}
+
+/* Each option is absolutely centered, then offset along the curve by the
+   rAF loop through transform/opacity/filter, so everything stays in step. */
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  white-space: nowrap;
+  font-size: var(--ow-font-size);
+  line-height: 1;
+  font-weight: 200;
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  /* --ow-p goes 0 -> 1 as an option approaches the middle of the wheel */
+  color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+}
+
+.option-wheel--right .option-wheel__item {
+  left: auto;
+  right: var(--ow-inset);
+  transform-origin: right center;
+}
+
+.option-wheel__item--selected {
+  font-weight: 500;
+}
+
+/* Same focus treatment as the rest of the site. */
+.option-wheel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Image options: each one fills the whole wheel box, so the selected shot
+   occupies the full frame and its neighbours sit behind it. */
+.option-wheel__item--media {
+  display: block;
+  width: 96px;
+  height: 100%;
+  overflow: hidden;
+  /* The base rule sets font-size/line-height for text; neutralise them so they
+     cannot add stray spacing around the image. */
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  border: 1px solid var(--hairline);
+  background: #15161a;
+  transition: border-color 0.18s ease;
+}
+.option-wheel__item--media.option-wheel__item--selected {
+  border-color: var(--accent);
+}
+/* The artwork fills the item, and the image inside it fills that via the shared
+   `position: absolute; inset: 0` rule, so `object-fit` decides how it sits. */
+.option-wheel__item--media > * {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+/* `contain`, not `cover`: the box keeps its own size and the screenshot is
+   scaled down to sit whole inside it. The wide 2.03:1 shots would otherwise be
+   cropped top and bottom by a taller frame. The dark item background shows
+   through as the letterbox, so the image reads as a mounted shot. */
+.option-wheel__item--media img {
+  object-fit: contain;
+}
+
+/* The selected option sits on top of its neighbours: the wheel stacks options
+   with transforms, so without this a neighbour could paint over the current one
+   as it eases past. */
+.option-wheel__item {
+  z-index: 1;
+}
+.option-wheel__item--selected {
+  z-index: 2;
+}

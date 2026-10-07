@@ -5011,11 +5011,19 @@ html {
   box-shadow: 0 12px 32px rgba(212, 0, 223, 0.12);
 }
 .business-template-preview {
+  position: relative;
   aspect-ratio: 1.35 / 1;
   overflow: hidden;
   padding: 10px;
   color: #27231f;
   background: #f0eee8;
+}
+.business-template-preview-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 .business-preview-nav {
   display: flex;

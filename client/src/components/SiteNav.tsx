@@ -27,7 +27,7 @@ export default function SiteNav() {
 
   return (
     <header className="site-nav">
-      <a className="site-nav-business" href="/business-templates">Got a business?</a>
+      {/* <a className="site-nav-business" href="/business-templates">Got a business?</a> */}
       <nav className="site-nav-links" aria-label="Main navigation" onClickCapture={handleNavClick}>
         <GooeyNav items={navItems} />
       </nav>
